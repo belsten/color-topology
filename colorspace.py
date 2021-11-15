@@ -52,3 +52,31 @@ def LMStoxyz(LMS):
     """
     return XYZtoxyz(LMStoXYZ(LMS))
     
+    
+def sRGBtoXYZ(sRGB):
+    """
+    Convert sRGB space to XYZ
+    parameters:
+    sRGB - scalar(3,n)
+        sRGB values
+    returns:
+    XYZ - scalar (3,n)
+        XYZ values
+    """
+    M = np.array([[0.4124,0.3576,0.1805],
+                  [0.2126,0.7152,0.0722],
+                  [0.0193,0.1192,0.9595]])
+    return M@sRGB
+
+
+def sRGBtoxyz(sRGB):
+    """
+    Convert sRGB space to CIE 1931 xyz
+    parameters:
+    sRGB - scalar(3,n)
+        sRGB values
+    returns:
+    xyz - scalar (3,n)
+        CIE 1931 xyz
+    """
+    return XYZtoxyz(sRGBtoXYZ(sRGB))
